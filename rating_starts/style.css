@@ -4,14 +4,19 @@
     color: #ccc;
     unicode-bidi: bidi-override;
     display: inline-block;
+    cursor: pointer;
+
 }
+
 .star-rating .star {
     color: gold;
     margin: 0 2px;
     cursor: pointer;
     transition: color 0.2s;
 }
+
+
 .star-rating .star:hover,
-.star-rating .star:hover ~ .star {
+.star-rating .star:hover~.star {
     color: #ccc;
 }
