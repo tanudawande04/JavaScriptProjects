@@ -1,0 +1,17 @@
+.star-rating {
+    direction: ltr;
+    font-size: 2.5rem;
+    color: #ccc;
+    unicode-bidi: bidi-override;
+    display: inline-block;
+}
+.star-rating .star {
+    color: gold;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+    color: #ccc;
+}
