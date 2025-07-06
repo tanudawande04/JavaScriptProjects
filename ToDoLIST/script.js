@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks.forEach((tasks) => {
-        renderTaska(tasks);
+        renderTask(tasks);
     });
 
     AddTaskBtn.addEventListener("click", () => {
@@ -18,18 +18,41 @@ document.addEventListener("DOMContentLoaded", () => {
         const newTask = {
             text: taskText,
             id: Date.now(),
-            comleted: false,
+            completed: false,
 
         };
 
         tasks.push(newTask);
+        renderTask(newTask);
         saveTasks();
         TodoInput.value = "";
         console.log(tasks);
     });
 
-    function renderTaska(task) {
-        console.log(tasks);
+    function renderTask(task) {
+        const li = document.createElement("li");
+        li.setAttribute("data-id", task.id);
+        if (task.completed) li.classList.add("completed");
+        li.innerHTML = ` 
+            <span>${task.text}</span>
+            <button> Delete </button>
+        `;
+        li.addEventListener("click", (e) => {
+            if (e.target.tagName === 'BUTTON') return;
+            task.completed = !task.completed;
+            li.classList.toggle("completed");
+            saveTasks();
+
+        });
+
+        li.querySelector("button").addEventListener("click", (e) => {
+            e.stopPropagation();
+            tasks = tasks.filter(t => t.id !== task.id);
+            li.remove();
+            saveTasks();
+
+        });
+        TodoList.appendChild(li);
 
     }
 
